@@ -2,11 +2,11 @@
 
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, Suspense } from "react";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-const VerifyLoginPage: FC = () => {
+const VerifyLoginContent: FC = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [statusMessage, setStatusMessage] = useState('Verifying your magic link...');
@@ -65,6 +65,14 @@ const VerifyLoginPage: FC = () => {
                 )}
             </div>
         </div>
+    )
+}
+
+const VerifyLoginPage: FC = () => {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p className="text-white">Loading...</p></div>}>
+            <VerifyLoginContent />
+        </Suspense>
     )
 }
 

@@ -2,7 +2,7 @@
 // Analogy: It's like calling a restaurant every 5 minutes to ask, "Is my takeout order ready yet?" until they finally say, "Yes, it's complete."
 'use client'
 import { Copy, Edit3, Linkedin, Instagram, Save, Twitter, Sparkles } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 import axios from 'axios';
@@ -40,7 +40,7 @@ const platformLabels: Record<Platform, string> = {
     medium: 'Blog Snippets',
 };
 
-const ContentDisplayPage: FC = () => {
+const ContentDisplayContent: FC = () => {
     const params = useParams();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -320,6 +320,14 @@ const ContentDisplayPage: FC = () => {
             </div>
         </div>
     );
+}
+
+const ContentDisplayPage: FC = () => {
+    return (
+        <Suspense fallback={<div className="p-10 max-w-7xl mx-auto text-center"><p className="text-gray-600">Loading content...</p></div>}>
+            <ContentDisplayContent />
+        </Suspense>
+    )
 }
 export default ContentDisplayPage
 
