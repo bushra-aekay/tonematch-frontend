@@ -1,13 +1,12 @@
 "use client"
 
-import React, { FC } from "react";
+import React, { FC, Suspense } from "react";
 import { useSearchParams } from "next/navigation"; //hook to read url parameters
 
-const CheckEmailPage: FC = () => {
+const CheckEmailContent: FC = () => {
     const searchParams = useSearchParams();
     const email = searchParams.get('email') // read the email parameter passed from login form
-// <div className="min-h-screen bg-black p-4">
-// <div className="flex justify-center items-start pt-20">
+
     return(
         <div className="min-h-screen bg-black p-8">
             <div className="flex justify-center items-start pt-25">
@@ -34,6 +33,14 @@ const CheckEmailPage: FC = () => {
             </div>
             </div>
         </div>
+    )
+}
+
+const CheckEmailPage: FC = () => {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center"><p className="text-white">Loading...</p></div>}>
+            <CheckEmailContent />
+        </Suspense>
     )
 }
 
