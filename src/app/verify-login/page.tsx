@@ -51,7 +51,7 @@ const VerifyLoginContent: FC = () => {
     return(
         <div className="min-h-screen flex items-center justify-center">
             <div className="max-w-md p-8 text-center">
-                <h2 className={`text-2xl font-semibold mb-4 ${isError? 'text-red-600': 'text-blue-600'}`}>
+                <h2 className={`text-5xl font-semibold mb-4 ${isError? 'text-red-600': 'text-orange-600'}`}>
                     {isError ? 'Login Failed':'Authentication in Progress'}
                 </h2>
                 <p className="">
@@ -60,7 +60,7 @@ const VerifyLoginContent: FC = () => {
                 {!isError && (
                     <div className="mt-6">
                         {/*Loading spinner */}
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto"></div>
                     </div>
                 )}
             </div>
