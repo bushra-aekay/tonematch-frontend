@@ -15,52 +15,62 @@ const ProjectCard: FC<ProjectCardProps> = ({ title, metricValue, metricLabel, st
     return (
         <div
             onClick={onClick}
-            className='bg-gray-900 p-6 border border-gray-800 rounded-xl shadow-lg flex flex-col justify-between hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-200 cursor-pointer group'
+            className='relative bg-gray-900/50 backdrop-blur-sm p-6 border border-gray-800/50 rounded-2xl shadow-lg flex flex-col justify-between min-h-[280px] hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 cursor-pointer group overflow-hidden'
         >
-            {/* Top Section */}
-            <div className='flex flex-col space-y-4'>
-                {/* Title */}
-                <h3 className='text-2xl font-bold text-white group-hover:text-orange-500 transition-colors'>
-                    {title}
-                </h3>
+            {/* Subtle gradient overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/0 group-hover:from-orange-500/5 group-hover:to-transparent transition-all duration-300 rounded-2xl pointer-events-none" />
 
-                {/* Sub labels */}
-                <div className='space-y-2 text-sm'>
-                    <div className="flex items-center text-white/60 hover:text-orange-500 transition-colors cursor-pointer">
-                        <BookOpen className="w-4 h-4 mr-2 text-orange-500" />
-                        <span className='font-medium'>Overview</span>
+            {/* Content */}
+            <div className='relative z-10 flex flex-col h-full'>
+                {/* Top Section */}
+                <div className='flex-1'>
+                    {/* Status Badge - Positioned at top right */}
+                    <div className="flex justify-between items-start mb-4">
+                        <div className={`inline-flex px-3 py-1 text-xs rounded-full font-semibold border
+                                        ${isPublished
+                                ? 'bg-green-500/10 text-green-400 border-green-500/30'
+                                : 'bg-orange-500/10 text-orange-400 border-orange-500/30'}`}>
+                            {isPublished ? 'Published' : 'Draft'}
+                        </div>
                     </div>
-                    <div className="flex items-center text-white/60 hover:text-orange-500 transition-colors cursor-pointer">
-                        <Zap className="w-4 h-4 mr-2 text-orange-500" />
-                        <span className='font-medium'>View tone analysis</span>
-                    </div>
-                    <div className="flex items-center text-white/60 hover:text-orange-500 transition-colors cursor-pointer">
-                        <FileText className="w-4 h-4 mr-2 text-orange-500" />
-                        <span className='font-medium'>Add new content</span>
+
+                    {/* Title */}
+                    <h3 className='text-xl font-bold text-white mb-4 group-hover:text-orange-400 transition-colors line-clamp-2'>
+                        {title}
+                    </h3>
+
+                    {/* Quick Actions */}
+                    <div className='space-y-2 mb-4'>
+                        <button className="flex items-center text-sm text-white/50 hover:text-orange-400 transition-colors w-full">
+                            <BookOpen className="w-4 h-4 mr-2 flex-shrink-0" />
+                            <span>View overview</span>
+                        </button>
+                        <button className="flex items-center text-sm text-white/50 hover:text-orange-400 transition-colors w-full">
+                            <Zap className="w-4 h-4 mr-2 flex-shrink-0" />
+                            <span>Tone analysis</span>
+                        </button>
+                        <button className="flex items-center text-sm text-white/50 hover:text-orange-400 transition-colors w-full">
+                            <FileText className="w-4 h-4 mr-2 flex-shrink-0" />
+                            <span>Add content</span>
+                        </button>
                     </div>
                 </div>
-            </div>
 
-            {/* Bottom Section */}
-            <div className="flex justify-between items-end mt-6 pt-4 border-t border-gray-800">
-                {/* Metric */}
-                <div>
-                    <div className="text-4xl font-extrabold text-white leading-none">
-                        {metricValue}
+                {/* Bottom Section - Metrics */}
+                <div className="mt-auto pt-4 border-t border-gray-800/50">
+                    <div className="flex items-end justify-between">
+                        <div>
+                            <div className="text-xs font-medium text-white/40 uppercase tracking-wider mb-1">
+                                {metricLabel}
+                            </div>
+                            <div className="text-3xl font-extrabold text-white">
+                                {metricValue}
+                            </div>
+                        </div>
+                        <div className="w-10 h-10 rounded-full bg-orange-500/10 border border-orange-500/30 flex items-center justify-center group-hover:bg-orange-500/20 transition-colors">
+                            <FileText className="w-5 h-5 text-orange-400" />
+                        </div>
                     </div>
-                    <div className="text-xs font-medium text-white/50 uppercase tracking-wider mt-1">
-                        {metricLabel}
-                    </div>
-                </div>
-
-                {/* Status Indicator */}
-                <div
-                    className={`px-3 py-1 text-xs rounded-full font-semibold tracking-wide border
-                                ${isPublished
-                            ? 'bg-green-900/30 text-green-400 border-green-700'
-                            : 'bg-orange-900/30 text-orange-400 border-orange-700'}`}
-                >
-                    {status.replace(/ /g, ' ')}
                 </div>
             </div>
         </div>

@@ -131,47 +131,52 @@ const StrategyDisplayPage: FC = () => {
     }
 
     return (
-        <div className='p-4 sm:p-10 max-w-7xl mx-auto'>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-2">
-                {project.name} Strategy
-            </h1>
-            <p className="text-white/60 mb-8">
-                Review your generated strategy and select your preferences for content generation.
-            </p>
+        <div className='p-4 sm:p-8 lg:p-10 max-w-7xl mx-auto'>
+            {/* Page Header */}
+            <div className="mb-8">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-2">
+                    {project.name}
+                </h1>
+                <p className="text-white/60">
+                    Review your generated strategy and configure content generation
+                </p>
+            </div>
 
             {/* Loading State */}
             {isLoading && (
-                <div className="bg-gray-900 border border-gray-800 p-10 rounded-lg shadow-xl text-center">
+                <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800/50 p-10 rounded-2xl shadow-xl text-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
                     <h2 className="text-xl font-semibold text-white">
-                        Generating Core Strategy...
+                        Generating Strategy...
                     </h2>
                     <p className="text-white/60 mt-2">
-                        This may take a minute as the AI analyzes your profile. Please wait or come back later.
+                        AI is analyzing your profile. This may take a minute.
                     </p>
                 </div>
             )}
 
             {/* Failed State */}
             {project.ai_strategy_status === 'FAILED' && (
-                <div className="bg-red-900/20 border border-red-700 text-red-400 p-6 rounded-lg">
+                <div className="bg-red-500/10 border border-red-500/30 text-red-400 p-6 rounded-2xl">
                     <p className="font-bold text-lg">Generation Failed</p>
-                    <p className="text-white/80">The AI failed to generate a strategy. Please review your profile data and try again.</p>
+                    <p className="text-white/80">The AI failed to generate a strategy. Please review your profile and try again.</p>
                 </div>
             )}
 
             {/* Ready State */}
             {isStrategyReady && (
-                <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8'>
-                    {/* Strategy Content Display */}
-                    <div className='lg:col-span-2 p-6 bg-gray-900 border border-gray-800 rounded-xl'>
-                        <h2 className="text-2xl font-bold mb-4 flex items-center text-white">
-                            <Zap className="w-6 h-6 mr-2 text-orange-500" />
-                            AI Strategy Summary
-                        </h2>
+                <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
+                    {/* Strategy Content Display - 2 columns */}
+                    <div className='lg:col-span-2 bg-gray-900/50 backdrop-blur-sm p-6 border border-gray-800/50 rounded-2xl shadow-lg'>
+                        <div className="flex items-center mb-4">
+                            <Zap className="w-6 h-6 mr-2 text-orange-400" />
+                            <h2 className="text-2xl font-bold text-white">
+                                AI Strategy Summary
+                            </h2>
+                        </div>
                         <div className='prose max-w-none'>
                             {project.ai_suggested_strategy ? (
-                                <pre className="bg-gray-800 p-4 rounded-lg text-sm whitespace-pre-wrap overflow-x-auto border border-gray-700 text-white/90">
+                                <pre className="bg-gray-800/50 p-4 rounded-xl text-sm whitespace-pre-wrap overflow-x-auto border border-gray-700/50 text-white/90">
                                     {JSON.stringify(project.ai_suggested_strategy, null, 2)}
                                 </pre>
                             ) : (
@@ -180,50 +185,50 @@ const StrategyDisplayPage: FC = () => {
                         </div>
                     </div>
 
-                    {/* Control Panel */}
-                    <div className='lg:col-span-1 space-y-6'>
+                    {/* Control Panel - 1 column */}
+                    <div className='lg:col-span-1 space-y-4'>
                         {/* Strategy Source Selection */}
-                        <div className='p-6 bg-gray-900 border border-gray-800 rounded-xl'>
-                            <h3 className="text-lg font-semibold mb-3 text-white">1. Select Strategy Source</h3>
-                            <p className="text-sm text-white/60 mb-4">Choose the foundation for your content tone and focus.</p>
+                        <div className='bg-gray-900/50 backdrop-blur-sm p-5 border border-gray-800/50 rounded-2xl shadow-lg'>
+                            <h3 className="text-base font-semibold mb-2 text-white">Strategy Source</h3>
+                            <p className="text-xs text-white/50 mb-4">Choose your content foundation</p>
 
-                            <div className='space-y-3'>
-                                {['ai', 'user', 'hybrid'].map(source => (
+                            <div className='space-y-2'>
+                                {[
+                                    { value: 'ai', label: 'AI Generated', desc: 'Pure AI strategy' },
+                                    { value: 'user', label: 'Your Mission', desc: 'Manual approach' },
+                                    { value: 'hybrid', label: 'Hybrid', desc: 'Best balance' }
+                                ].map(source => (
                                     <button
-                                        key={source}
-                                        onClick={() => setSelectedSource(source as StrategySource)}
-                                        className={`w-full text-left p-3 rounded-lg border transition-all ${selectedSource === source
-                                                ? 'bg-orange-500 text-white border-orange-600 shadow-lg'
-                                                : 'bg-gray-800 text-white/80 border-gray-700 hover:bg-gray-700'
+                                        key={source.value}
+                                        onClick={() => setSelectedSource(source.value as StrategySource)}
+                                        className={`w-full text-left p-3 rounded-xl border transition-all ${selectedSource === source.value
+                                                ? 'bg-orange-500/90 text-white border-orange-500 shadow-md'
+                                                : 'bg-gray-800/50 text-white/80 border-gray-700/50 hover:bg-gray-800'
                                             }`}
                                     >
-                                        <span className="font-medium capitalize">
-                                            {source} Strategy
-                                            {source === 'ai' && ' (AI Generated)'}
-                                            {source === 'user' && ' (Your Mission)'}
-                                            {source === 'hybrid' && ' (Best for Consistency)'}
-                                        </span>
+                                        <div className="font-medium">{source.label}</div>
+                                        <div className="text-xs opacity-75">{source.desc}</div>
                                     </button>
                                 ))}
                             </div>
                         </div>
 
                         {/* Platform Selector */}
-                        <div className='p-6 bg-gray-900 border border-gray-800 rounded-xl'>
-                            <h3 className="text-lg font-semibold mb-3 text-white">2. Select Platforms</h3>
-                            <p className="text-sm text-white/60 mb-4">Content will be optimized for selected platforms.</p>
+                        <div className='bg-gray-900/50 backdrop-blur-sm p-5 border border-gray-800/50 rounded-2xl shadow-lg'>
+                            <h3 className="text-base font-semibold mb-2 text-white">Select Platforms</h3>
+                            <p className="text-xs text-white/50 mb-4">Choose where to publish</p>
 
-                            <div className='grid grid-cols-2 gap-3'>
+                            <div className='grid grid-cols-2 gap-2'>
                                 {['LinkedIn', 'X', 'Instagram', 'Reddit', 'Medium'].map(platform => (
                                     <button
                                         key={platform}
                                         onClick={() => togglePlatform(platform.toLowerCase())}
-                                        className={`flex items-center justify-center py-3 rounded-lg border transition-colors ${selectedPlatforms.includes(platform.toLowerCase())
-                                                ? 'bg-orange-900/30 text-orange-400 border-orange-500'
-                                                : 'bg-gray-800 text-white/60 border-gray-700 hover:bg-gray-700'
+                                        className={`flex items-center justify-center py-2.5 px-2 rounded-xl border text-sm transition-all ${selectedPlatforms.includes(platform.toLowerCase())
+                                                ? 'bg-orange-500/10 text-orange-400 border-orange-500/50'
+                                                : 'bg-gray-800/50 text-white/60 border-gray-700/50 hover:bg-gray-800'
                                             }`}
                                     >
-                                        {selectedPlatforms.includes(platform.toLowerCase()) && <CheckCircle className="w-4 h-4 mr-1" />}
+                                        {selectedPlatforms.includes(platform.toLowerCase()) && <CheckCircle className="w-3.5 h-3.5 mr-1" />}
                                         {platform}
                                     </button>
                                 ))}
@@ -234,10 +239,10 @@ const StrategyDisplayPage: FC = () => {
                         <button
                             onClick={handleGeneratePosts}
                             disabled={selectedPlatforms.length === 0}
-                            className="w-full flex items-center justify-center px-6 py-4 bg-orange-500 text-white font-bold text-lg rounded-xl shadow-xl hover:bg-orange-600 transition disabled:bg-gray-700 disabled:cursor-not-allowed"
+                            className="w-full flex items-center justify-center px-6 py-4 bg-orange-500/90 hover:bg-orange-500 text-white font-bold rounded-xl shadow-lg shadow-orange-500/20 transition-all disabled:bg-gray-800 disabled:shadow-none disabled:cursor-not-allowed"
                         >
-                            <LayoutGrid className="w-6 h-6 mr-3" />
-                            Generate Content Now!
+                            <LayoutGrid className="w-5 h-5 mr-2" />
+                            Generate Content
                         </button>
                     </div>
                 </div>

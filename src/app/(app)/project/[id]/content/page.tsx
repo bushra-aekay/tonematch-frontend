@@ -207,71 +207,78 @@ const ContentDisplayContent: FC = () => {
             {/* Post Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredPosts.map(post => (
-                    <div key={post.id} className="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-800 hover:border-orange-500 hover:shadow-xl transition-all relative group">
+                    <div key={post.id} className="relative bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-gray-800/50 hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/10 transition-all group overflow-hidden">
 
-                        <div className="absolute top-4 right-4 p-2 bg-gray-800 rounded-full shadow-inner">
-                            {platformIcons[post.platform]}
+                        {/* Gradient overlay on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/0 group-hover:from-orange-500/5 group-hover:to-transparent transition-all duration-300 rounded-2xl pointer-events-none" />
+
+                        {/* Content */}
+                        <div className="relative z-10">
+                            {/* Platform Icon Badge */}
+                            <div className="absolute top-0 right-0 w-8 h-8 flex items-center justify-center bg-gray-800/80 backdrop-blur-sm rounded-full border border-gray-700/50">
+                                {platformIcons[post.platform]}
+                            </div>
+
+                            {editingId === post.id ? (
+                                <div className="pr-10">
+                                    <textarea
+                                        className="w-full min-h-32 p-3 border-2 border-dashed border-orange-500/50 bg-gray-800/50 text-white rounded-xl focus:outline-none focus:border-orange-500 resize-none placeholder-gray-500"
+                                        value={post.editedContent ?? post.text}
+                                        onChange={(e) => handleEditChange(post.id, e.target.value)}
+                                    />
+                                    <div className="flex gap-2 mt-3">
+                                        <button
+                                            onClick={() => handleSaveEdit(post)}
+                                            className="flex-1 flex items-center justify-center text-sm font-semibold px-4 py-2 bg-orange-500/90 hover:bg-orange-500 text-white rounded-xl transition-all shadow-md"
+                                        >
+                                            <Save className="w-4 h-4 mr-1.5" /> Save
+                                        </button>
+                                        <button
+                                            onClick={() => setEditingId(null)}
+                                            className="flex-1 flex items-center justify-center text-sm font-semibold px-4 py-2 bg-gray-800/50 hover:bg-gray-800 text-white/90 rounded-xl transition-all border border-gray-700/50"
+                                        >
+                                            <XIcon className="w-4 h-4 mr-1.5" /> Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="pr-10">
+                                    <p className="text-white/90 text-sm leading-relaxed mb-4 whitespace-pre-wrap min-h-[120px]">
+                                        {post.text}
+                                    </p>
+
+                                    <div className="flex justify-between items-center pt-4 border-t border-gray-800/50">
+                                        <div className="flex flex-col">
+                                            <span className="text-xs font-medium text-white/40 mb-0.5">Tone</span>
+                                            <span className="text-sm font-semibold text-orange-400">{post.tone}</span>
+                                        </div>
+
+                                        <div className="flex gap-2">
+                                            <button
+                                                onClick={() => setEditingId(post.id)}
+                                                title="Edit Post"
+                                                className="p-2 text-orange-400 hover:bg-orange-500/10 rounded-lg transition-all"
+                                            >
+                                                <Edit3 className="w-4 h-4" />
+                                            </button>
+                                            <button
+                                                onClick={() => handleCopy(post.text)}
+                                                title="Copy to Clipboard"
+                                                className="p-2 text-green-400 hover:bg-green-500/10 rounded-lg transition-all"
+                                            >
+                                                <Copy className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
-
-                        {editingId === post.id ? (
-                            <div>
-                                <textarea
-                                    className="w-full min-h-32 p-3 border-2 border-dashed border-orange-500/50 bg-gray-800 text-white rounded-lg focus:outline-none focus:border-orange-500 resize-none"
-                                    value={post.editedContent ?? post.text}
-                                    onChange={(e) => handleEditChange(post.id, e.target.value)}
-                                />
-                                <div className="flex space-x-2 mt-3">
-                                    <button
-                                        onClick={() => handleSaveEdit(post)}
-                                        className="flex items-center text-sm font-semibold px-3 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
-                                    >
-                                        <Save className="w-4 h-4 mr-1" /> Save
-                                    </button>
-                                    <button
-                                        onClick={() => setEditingId(null)}
-                                        className="flex items-center text-sm font-semibold px-3 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition"
-                                    >
-                                        <XIcon className="w-4 h-4 mr-1" /> Cancel
-                                    </button>
-                                </div>
-                            </div>
-                        ) : (
-                            <div>
-                                <p className="text-white/90 text-base leading-relaxed mb-4 whitespace-pre-wrap pr-12">
-                                    {post.text}
-                                </p>
-
-                                <div className="flex justify-between items-center pt-4 border-t border-gray-800">
-                                    <div className="flex flex-col">
-                                        <span className="text-xs font-medium text-white/50">Tone Profile:</span>
-                                        <span className="text-sm font-semibold text-orange-400">{post.tone}</span>
-                                    </div>
-
-                                    <div className="flex space-x-2">
-                                        <button
-                                            onClick={() => setEditingId(post.id)}
-                                            title="Edit Post"
-                                            className="p-2 text-orange-500 hover:bg-orange-500/10 rounded-full transition"
-                                        >
-                                            <Edit3 className="w-5 h-5" />
-                                        </button>
-                                        <button
-                                            onClick={() => handleCopy(post.text)}
-                                            title="Copy to Clipboard"
-                                            className="p-2 text-green-500 hover:bg-green-500/10 rounded-full transition"
-                                        >
-                                            <Copy className="w-5 h-5" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
                     </div>
                 ))}
 
                 {posts.length > 0 && filteredPosts.length === 0 && (
-                    <div className="md:col-span-3 text-center p-12 bg-gray-900 border border-gray-800 rounded-xl border-dashed">
-                        <p className="text-white/60 font-medium">No posts generated for the {platformLabels[activePlatform]} platform in this batch.</p>
+                    <div className="md:col-span-3 text-center p-12 bg-gray-900/50 backdrop-blur-sm border border-gray-800/50 rounded-2xl border-dashed">
+                        <p className="text-white/60 font-medium">No posts generated for {platformLabels[activePlatform]} in this batch</p>
                     </div>
                 )}
             </div>
@@ -280,7 +287,7 @@ const ContentDisplayContent: FC = () => {
             <div className="mt-12 text-center">
                 <button
                     onClick={() => console.log('Simulating Export/Scheduling...')}
-                    className="w-full sm:w-auto px-10 py-4 bg-orange-500 text-white font-bold text-xl rounded-full shadow-xl hover:bg-orange-600 transition"
+                    className="w-full sm:w-auto px-10 py-4 bg-orange-500/90 hover:bg-orange-500 text-white font-bold text-lg rounded-xl shadow-lg shadow-orange-500/20 transition-all"
                 >
                     Export All Content
                 </button>
