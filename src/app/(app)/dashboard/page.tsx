@@ -85,18 +85,21 @@ const DashboardPage: FC = () => {
                         metricValue="5.8K"
                         metricLabel="Views"
                         status="not published"
+                        onClick={() => router.push('/project/new')}
                     />
                     <ProjectCard
                         title="Blog Content Strategy"
                         metricValue="22"
                         metricLabel="Articles"
                         status="published"
+                        onClick={() => router.push('/project/new')}
                     />
                     <ProjectCard
                         title="Social Media Tones"
                         metricValue="1.2M"
                         metricLabel="Reach"
                         status="published"
+                        onClick={() => router.push('/project/new')}
                     />
                 </div>
             </main>

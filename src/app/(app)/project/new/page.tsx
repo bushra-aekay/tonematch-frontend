@@ -154,17 +154,17 @@ const NewProjectPage: FC = () =>{
 
     return(
         <div className="min-h-screen flex items-center justify-center">
-            <div className="w-full max-w-xl px-4 sm:px-6 lg:px-8 py-8">
+            <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
                 {renderStep()}
                 {/* Step indicator circles */}
                 {(currentStep === 1 || (currentStep ===2 && hasToneProfile === false)) && (
                     <div className="flex justify-center mt-6 space-x-2">
                         {Array.from({ length: totalInputSteps }).map((_, index) => (
-                            <div 
+                            <div
                                 key={index}
                                 // index 0 is step 1, index 1 is step 2
-                                className={`w-3 h-3 rounded-full transition-colors duration-200 
-                                    ${index + 1 === currentStep ? 'bg-blue-600' : 'bg-gray-300'}`}
+                                className={`w-3 h-3 rounded-full transition-colors duration-200
+                                    ${index + 1 === currentStep ? 'bg-orange-500' : 'bg-gray-700'}`}
                             />
                         ))}
                     </div>

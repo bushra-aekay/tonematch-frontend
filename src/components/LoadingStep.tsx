@@ -88,17 +88,16 @@ const LoadingStep: FC<LoadingStepProps> = ({ projectData }) => {
                 }
             }
 
-            // Mock progress bar 
+            // Mock progress bar
             const interval = setInterval(() => {
                 setProgress(prev => {
                     if (prev >= 100) {
                     clearInterval(interval);
-                    // router.pish(`/project/${newProjectId}/strategy);
-                    router.push(`${newProjectId}/strategy`);//placeholder redirect
+                    router.push(`/project/${newProjectId}/strategy`);
                     return 100;
                 }
                 // faking variable progress speed
-                return prev + (Math.random()*(10-2) + 2); 
+                return prev + (Math.random()*(10-2) + 2);
                 });
                 const messageIndex = Math.floor((progress/100)*dynamicMessages.length);
                 setCurrentMessage(dynamicMessages[Math.min(messageIndex, dynamicMessages.length - 1)]);
@@ -110,8 +109,7 @@ const LoadingStep: FC<LoadingStepProps> = ({ projectData }) => {
         } catch (submitError: any) {
             console.error(submitError);
             const errorMessage = submitError.response?.data?.detail || "An error occurred during project setup. Please check backend connection.";
-            setError(errorMessage);
-            setError("Failed to create. Please try again later.")
+            setError(errorMessage)
         }
         // api logic
         
