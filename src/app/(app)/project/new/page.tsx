@@ -154,7 +154,7 @@ const NewProjectPage: FC = () =>{
 
     return(
         <div className="min-h-screen flex items-center justify-center">
-            <div className="w-full max-w-xl p-8">
+            <div className="w-full max-w-xl px-4 sm:px-6 lg:px-8 py-8">
                 {renderStep()}
                 {/* Step indicator circles */}
                 {(currentStep === 1 || (currentStep ===2 && hasToneProfile === false)) && (

@@ -47,7 +47,7 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
     }
 
     return (
-        <div className="bg-black p-10 rounder 2-xl shadow-2xl w-full">
+        <div className="bg-black p-10 rounded-2xl shadow-2xl w-full">
             <h2 className="text-3xl font-bold text-white mb-6">
                 Step 1: Business Details
             </h2>
@@ -68,13 +68,13 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         value={data.name}
                         onChange={handleChange}
                         required
-                        className="mt-1 block w-full px-4 py-2 border bprder-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="Eg: Tonematch Marketing"
                     />
                 </div>
                 {/* short Description */}
                 <div>
-                    <label htmlFor="shortDescription" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="shortDescription" className="block text-sm font-medium text-white">
                         Short Description (What do you actually do?) *
                     </label>
                     <textarea
@@ -84,7 +84,7 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         onChange={handleChange}
                         required
                         rows={2}
-                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="e.g., A SaaS tool that ensures brand voice consistency across social media channels using AI."
                     />
                 </div>
@@ -100,7 +100,7 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         onChange={handleChange}
                         required
                         rows={3}
-                        className="mt-1 block w-full px-4 py-2 border bprder-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="Describe who you are trying to reach (e.g., Small business owners, age 25-45, in the US, struggling with content consistency)."                        />
                 </div>
                 
@@ -115,7 +115,7 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         id="industry"
                         value={data.industry}
                         onChange={handleChange}
-                        className="mt-1 block w-full px-4 py-2 border bprder-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="Eg: Consulting, SaaS, Financial Tech, E-Commerce"
                     />
                 </div>
@@ -130,12 +130,12 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         value={data.mission}
                         onChange={handleChange}
                         rows={3}
-                        className="mt-1 block w-full px-4 py-2 border bprder-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="Describe who you are trying to reach (e.g., Small business owners, age 25-45, in the US, struggling with content consistency)."                        />
                 </div>
                 {/* Website Link (Optional) */}
                 <div>
-                    <label htmlFor="websiteLink" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="websiteLink" className="block text-sm font-medium text-white">
                         Website Link
                     </label>
                     <input
@@ -144,14 +144,14 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         id="websiteLink"
                         value={data.websiteLink}
                         onChange={handleChange}
-                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="https://www.yourbusiness.com"
                     />
                 </div>
 
                 {/* Current Marketing (Optional) */}
                 <div>
-                    <label htmlFor="currentMarketing" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="currentMarketing" className="block text-sm font-medium text-white">
                         Current Marketing Strategy
                     </label>
                     <textarea
@@ -160,14 +160,14 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         value={data.currentMarketing}
                         onChange={handleChange}
                         rows={3}
-                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="e.g., We focus heavily on LinkedIn thought leadership posts and weekly blog articles."
                     />
                 </div>
 
                 {/* Platforms Currently Used (Optional - simplified to string) */}
                 <div>
-                    <label htmlFor="platformsCurrentlyUsed" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="platformsCurrentlyUsed" className="block text-sm font-medium text-white">
                         Platforms Currently Used (Comma-separated)
                     </label>
                     <input
@@ -176,14 +176,14 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         id="platformsCurrentlyUsed"
                         value={data.platformsCurrentlyUsed}
                         onChange={handleChange}
-                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="e.g., LinkedIn, Twitter, Blog"
                     />
                 </div>
                 
                 {/* Brand Keywords (Optional - simplified to string) */}
                 <div>
-                    <label htmlFor="brandKeywords" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="brandKeywords" className="block text-sm font-medium text-white">
                         Core Brand Keywords (Comma-separated)
                     </label>
                     <input
@@ -192,14 +192,14 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         id="brandKeywords"
                         value={data.brandKeywords}
                         onChange={handleChange}
-                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="e.g., brand consistency, content automation, voice AI"
                     />
                 </div>
                 
                 {/* Voice Description (Optional - Placeholder) */}
                 <div>
-                    <label htmlFor="voice" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="voice" className="block text-sm font-medium text-white">
                         Existing Voice Description (If known)
                     </label>
                     <input
@@ -208,7 +208,7 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                         id="voice"
                         value={data.voice}
                         onChange={handleChange}
-                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                         placeholder="e.g., Witty, Sarcastic, but highly Professional"
                     />
                     <p className="text-xs text-gray-500 mt-1">
@@ -218,11 +218,11 @@ const BusinessProfileStep: FC<BusinessProfileStepProps> = ({ onNext, inititalDat
                 
                 {/* Next button */}
                 <div className="flex justify-end pt-4">
-                    <button 
+                    <button
                         type="submit"
                         disabled={!isFormValid}
                         className={`flex items-center px-6 py-3 rounded-xl text-white font-semibold transition-colors
-                            ${isFormValid ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
+                            ${isFormValid ? 'bg-orange-500 hover:bg-orange-600' : 'bg-gray-700 cursor-not-allowed'}`}
                     >
                         Next
                         <ArrowRight className='w-5 h-5 ml-2'/>

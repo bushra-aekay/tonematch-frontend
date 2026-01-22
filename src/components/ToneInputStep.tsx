@@ -44,12 +44,12 @@ const ToneInputStep: FC<ToneInputStepProps> = ({ onNext, onBack, initialData }) 
         }
     };
     return (
-        <div className="bg-white p-10 rounded-2xl shadow-2xl w-full">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-                <Rss className="w-7 h-7 mr-3 text-purple-600" />
+        <div className="bg-black border border-gray-800 p-10 rounded-2xl shadow-2xl w-full">
+            <h2 className="text-3xl font-bold text-white mb-6 flex items-center">
+                <Rss className="w-7 h-7 mr-3 text-orange-500" />
                 Step 2: Tone Profile Input
             </h2>
-            <p className="text-gray-500 mb-6">
+            <p className="text-white/80 mb-6">
                 Please provide **{MIN_POSTS} to {MAX_POSTS} examples** of your existing social media posts. The AI will analyze this to capture your unique voice.
             </p>
 
@@ -57,7 +57,7 @@ const ToneInputStep: FC<ToneInputStepProps> = ({ onNext, onBack, initialData }) 
                 
                 {posts.map((post, index) => (
                     <div key={index} className="flex items-start space-x-3">
-                        <label className="text-sm font-semibold text-gray-700 mt-2 shrink-0 w-8">
+                        <label className="text-sm font-semibold text-white/80 mt-2 shrink-0 w-8">
                             Post {index + 1}:
                             {index < MIN_POSTS && <span className="text-red-500">*</span>}
                         </label>
@@ -65,14 +65,14 @@ const ToneInputStep: FC<ToneInputStepProps> = ({ onNext, onBack, initialData }) 
                             value={post}
                             onChange={(e) => handlePostChange(index, e.target.value)}
                             rows={3}
-                            className="grow px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 resize-none"
+                            className="grow px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 resize-none text-gray-900"
                             placeholder={`Example post content (${index < MIN_POSTS ? 'Required' : 'Optional'})`}
                         />
                         {posts.length > MIN_POSTS && (
                             <button
                                 type="button"
                                 onClick={() => handleRemovePost(index)}
-                                className="mt-2 text-red-500 hover:text-red-700"
+                                className="mt-2 text-orange-500 hover:text-orange-400"
                                 title="Remove Post"
                             >
                                 <X className="w-5 h-5" />
@@ -85,7 +85,7 @@ const ToneInputStep: FC<ToneInputStepProps> = ({ onNext, onBack, initialData }) 
                     <button
                         type="button"
                         onClick={handleAddPost}
-                        className="text-purple-600 hover:text-purple-700 text-sm font-medium flex items-center"
+                        className="text-orange-500 hover:text-orange-400 text-sm font-medium flex items-center"
                     >
                         <Plus className="w-4 h-4 mr-1" />
                         Add another post ({posts.length}/{MAX_POSTS})
@@ -96,7 +96,7 @@ const ToneInputStep: FC<ToneInputStepProps> = ({ onNext, onBack, initialData }) 
                     <button
                         type="button"
                         onClick={onBack}
-                        className="flex items-center px-4 py-2 rounded-xl text-gray-700 font-semibold bg-gray-100 hover:bg-gray-200 transition"
+                        className="flex items-center px-4 py-2 rounded-xl text-white font-semibold bg-gray-800 hover:bg-gray-700 transition"
                     >
                         <ArrowLeft className="w-5 h-5 mr-2" />
                         Back to Details
@@ -104,8 +104,8 @@ const ToneInputStep: FC<ToneInputStepProps> = ({ onNext, onBack, initialData }) 
                     <button
                         type="submit"
                         disabled={!isValid}
-                        className={`flex items-center px-6 py-3 rounded-xl text-white font-semibold transition-colors 
-                            ${isValid ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-400 cursor-not-allowed'}`}
+                        className={`flex items-center px-6 py-3 rounded-xl text-white font-semibold transition-colors
+                            ${isValid ? 'bg-orange-500 hover:bg-orange-600' : 'bg-gray-700 cursor-not-allowed'}`}
                     >
                         Analyze & Generate Strategy
                         <ArrowRight className="w-5 h-5 ml-2" />

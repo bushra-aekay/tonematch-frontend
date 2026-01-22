@@ -126,7 +126,7 @@ const LoadingStep: FC<LoadingStepProps> = ({ projectData }) => {
     return(
         <div className="min-h-screen flex items-center justify-center">
             <div className="p-12 w-full max-w-lg text-center">
-                <h2 className={`text-3xl font-bold mb-8${error ? 'text-red-600' : 'text-white'}`}>
+                <h2 className={`text-3xl font-bold mb-8 ${error ? 'text-red-600' : 'text-white'}`}>
                     {error ? 'Submission failed' : 'generating your strategy'}
                 </h2>
                 {error ? (
@@ -135,10 +135,10 @@ const LoadingStep: FC<LoadingStepProps> = ({ projectData }) => {
                         {/* Container for the error message, colored red. */}
                         <p>{error}</p>
                         {/* Displays the error message text. */}
-                        <button 
+                        <button
                             onClick={() => router.push('/dashboard')}
                             // When clicked, navigates the user to the dashboard page.
-                            className="mt-4 text-blue-600 hover:underline"
+                            className="mt-4 text-orange-500 hover:text-orange-400 hover:underline"
                         >
                             {/* Styles the button to look like a blue link. */}
                             Go back to Dashboard
@@ -150,16 +150,16 @@ const LoadingStep: FC<LoadingStepProps> = ({ projectData }) => {
                     <>
                         {/* Fragment: allows grouping multiple HTML elements without adding an extra div. */}
                         {/* Loading Text */}
-                        <p className="text-lg font-bold text-blue-600 mb-4 h-12 flex items-center justify-center">
-                            {/* Displays the current message in large, bold blue text. */}
+                        <p className="text-lg font-bold text-orange-500 mb-4 h-12 flex items-center justify-center">
+                            {/* Displays the current message in large, bold orange text. */}
                             {currentMessage}
                         </p>
 
                         {/* Loading Bar */}
-                        <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+                        <div className="w-full bg-gray-800 rounded-full h-3 mb-4">
                             {/* The background track for the loading bar. */}
-                            <div 
-                                className="bg-blue-600 h-3 rounded-full transition-all duration-1000"
+                            <div
+                                className="bg-orange-500 h-3 rounded-full transition-all duration-1000"
                                 // The inner bar, colored blue. The 'transition' makes the movement smooth.
                                 style={{ width: `${Math.min(100, progress)}%` }}
                                 // Sets the width of the bar based on the 'progress' state variable.
@@ -169,7 +169,7 @@ const LoadingStep: FC<LoadingStepProps> = ({ projectData }) => {
                         {/* Approx Time Left */}
                         <div className="flex justify-end text-right">
                             {/* Aligns the time text to the right side. */}
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-white/50">
                                 {/* Displays the time and progress info in small, light gray text. */}
                                 {Math.floor(progress)}% Complete | Approx {timeLeft} seconds left
                             </p>
@@ -177,8 +177,8 @@ const LoadingStep: FC<LoadingStepProps> = ({ projectData }) => {
                         
                         {progress >= 100 && (
                             // If the progress is 100 or more, show the completion message.
-                            <p className="text-green-600 mt-6 font-semibold">
-                                {/* Displays the success message in green. */}
+                            <p className="text-orange-400 mt-6 font-semibold">
+                                {/* Displays the success message in orange. */}
                                 Generation Complete! Redirecting...
                             </p>
                         )}
